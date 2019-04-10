@@ -5,7 +5,7 @@
  */
 package com.patrickhub.dao;
 
-import com.patrickhub.beans.User;
+import com.patrickhub.beans.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ public class UserDao {
     @Inject
     private DBConnection dbConnection;
     
-    public boolean saveUser(User user){
+    public boolean saveCustomer(Customer customer){
         boolean isInsert = false;
         // get db connection
         Connection connection = dbConnection.getConnection();
@@ -32,8 +32,8 @@ public class UserDao {
             // get prepared statement
             PreparedStatement statement =  connection.prepareStatement(sql);
             // set sql insert parameters
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(1, customer.getUsername());
+            statement.setString(2, customer.getPassword());
             // execute sql insert
             int row = statement.executeUpdate();
             if(row == 1){
