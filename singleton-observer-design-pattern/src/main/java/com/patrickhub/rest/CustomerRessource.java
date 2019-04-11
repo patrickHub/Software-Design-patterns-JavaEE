@@ -6,7 +6,9 @@
 package com.patrickhub.rest;
 
 import com.patrickhub.beans.Customer;
-import com.patrickhub.dao.UserDao;
+import com.patrickhub.events.CustomerEvent;
+import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -22,16 +24,14 @@ import javax.ws.rs.core.MediaType;
 @Path("customer")
 public class CustomerRessource {
     
-    @Inject
-    private UserDao userDao;
+    @Inject @CustomerEvent(CustomerEvent.Type.ADD)
+    private Event<Customer> eventAddCustomer;
+    
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createCustomer(@Valid Customer customer){
-        if(userDao.saveCustomer(customer)){
-            return  "Customer created successfully!";
-        }
-        return "Fail to create Customer!";
+    public void createCustomer(@Valid Customer customer){
+       eventAddCustomer.fire(customer);
     }
     
 }

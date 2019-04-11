@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import com.patrickhub.constraints.ValidDateFormat;
 
 
 /**
@@ -19,6 +20,7 @@ import javax.validation.constraints.Size;
 
 public class Customer {
     
+    private int id;
     @NotNull(message = "This field is required!")
     @Size(min = 5, max = 10, message = "This field must be 5 caracters min and 10 caracters max")
     @Pattern(regexp = ".*[a-zA-Z]+.*", message="This field must contain a least one caracter")
@@ -46,12 +48,10 @@ public class Customer {
     @Pattern(regexp = "^[0-9]*$", message = "This field must contains only numbers")
     private String phone;
     
-    @NotNull(message = "This field is required!")
+    @NotNull(message="This  field is required!")
+    @ValidDateFormat(pattern = "yyyy-MM-dd", message = "This date is invalid")
     private String birthdate;
     
-    
-    
-
     
     
     /**
@@ -150,6 +150,20 @@ public class Customer {
      */
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
     

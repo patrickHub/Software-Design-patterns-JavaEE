@@ -8,13 +8,14 @@ package com.patrickhub.rest.error;
 import java.util.logging.Logger;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
  *
- * @author Patrick-PC
+ * @author PatrickHub
  */
 
 @Provider
@@ -22,12 +23,11 @@ public class BeanValidationExceptionMapper implements ExceptionMapper<Constraint
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {
-        Logger.getAnonymousLogger().info("Violation of Some bean Validation");
+        Logger.getAnonymousLogger().info("Violation of Somes beans Validation occured!");
 
-        ConstraintViolation cv = (ConstraintViolation) exception.getConstraintViolations().toArray()[0];
-        //oh yeah... you need to shell out some $$$ !
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity(exception.getMessage())
+                .type(MediaType.APPLICATION_JSON)
                 .build();
     }
 }

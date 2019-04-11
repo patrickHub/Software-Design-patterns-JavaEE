@@ -22,9 +22,13 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = {})
-public @interface ValidDatePast {
-    String message() default "{This date must be a past date!}";
+public @interface ValidDateFormat {
+    String message() default "This date must be a valid date!";
     
     Class<?>[] groups() default{};
+    
     Class<? extends Payload>[] payload() default{};
+    
+   String pattern();
+    
 }
