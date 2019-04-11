@@ -17,6 +17,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
         </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>singleton-observer-design-pattern</finalName>
