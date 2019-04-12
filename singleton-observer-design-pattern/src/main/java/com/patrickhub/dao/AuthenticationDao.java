@@ -59,7 +59,7 @@ public class AuthenticationDao {
             // check weather userID has been generated
 	    ResultSet generatedIds = statement.getGeneratedKeys();
             if (generatedIds.next()) {
-                customer.setId(generatedIds.getInt(1));
+                customer.setUserID(generatedIds.getInt(1));
                 eventAddUser.fire(customer);
             }
             else {
@@ -67,6 +67,33 @@ public class AuthenticationDao {
             }
 	        
            
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthenticationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    /**
+     * update user credentials.
+     * 
+     * @param customer 
+     */
+    public void updateUserCredentials(@Observes @CustomerEvent(CustomerEvent.Type.UPDATE) @Priority(20) Customer customer){
+ 
+        // get db connection
+        Connection connection = dbConnection.getConnection();
+        // write sql insert
+        String sql = "UPDATE users SET username=?, password=? WHERE userID=? ;";
+        try {
+            // get prepared statement
+            PreparedStatement statement =  connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // set sql update parameters
+            statement.setString(1, customer.getUsername());
+            statement.setString(2, customer.getPassword());
+            statement.setInt(3, customer.getUserID());
+            // execute sql update
+            statement.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(AuthenticationDao.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -48,12 +48,38 @@ public class CustomerDao {
             statement.setString(3, customer.getEmail());
             statement.setString(4, customer.getPhone());
             statement.setDate(5, new Date(Utils.formatDate(customer.getBirthdate()).getTime()));
-            statement.setInt(6, customer.getId());
+            statement.setInt(6, customer.getUserID());
             // execute sql insert
             int row = statement.executeUpdate();
             if (row == 0) {
                 throw new SQLException("Failled to create Customer, no rows affected.");
             }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateCustomer(@Observes @CustomerEvent(CustomerEvent.Type.UPDATE) @Priority(10) Customer customer){
+       
+        // get db connection
+        Connection connection = dbConnection.getConnection();
+        // write sql update
+        String sql = "UPDATE customers SET customerFirstName = ?, customerLastName = ?, "
+                        + "customerEmail = ?, customerPhone = ?, customerBirthdate = ? "
+                        + "WHERE userID = ?;";
+
+        try {
+            // get prepared statement
+            PreparedStatement statement =  connection.prepareStatement(sql);
+            // set sql insert parameters
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setString(3, customer.getEmail());
+            statement.setString(4, customer.getPhone());
+            statement.setDate(5, new Date(Utils.formatDate(customer.getBirthdate()).getTime()));
+            statement.setInt(6, customer.getUserID());
+            // execute sql insert
+            statement.executeUpdate();
            
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);

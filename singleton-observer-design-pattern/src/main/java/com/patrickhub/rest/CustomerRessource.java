@@ -45,10 +45,12 @@ public class CustomerRessource {
     }
     
     @PUT
+    @Path("{id: \\d+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response UpdateCustomer(@Valid Customer customer){
+    public Response UpdateCustomer(@PathParam("id") int id, @Valid Customer customer){
+        customer.setUserID(id);
         eventUpdateCustomer.fire(customer);
-        return Response.status(200).entity("Customer: " + customer.getId() + " is updated successfully!").build();
+        return Response.status(200).entity("Customer: " + customer.getUserID()+ " is updated successfully!").build();
     }
     
     @DELETE

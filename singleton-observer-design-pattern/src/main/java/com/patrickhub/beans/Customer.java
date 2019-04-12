@@ -20,7 +20,7 @@ import com.patrickhub.constraints.ValidDateFormat;
 
 public class Customer {
     
-    private int id;
+    private int userID;
     @NotNull(message = "This field is required!")
     @Size(min = 5, max = 10, message = "This field must be 5 caracters min and 10 caracters max")
     @Pattern(regexp = ".*[a-zA-Z]+.*", message="This field must contain a least one caracter")
@@ -153,17 +153,17 @@ public class Customer {
     }
 
     /**
-     * @return the id
+     * @return the userID
      */
-    public int getId() {
-        return id;
+    public int getUserID() {
+        return userID;
     }
 
     /**
-     * @param id the id to set
+     * @param userID the id to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
     
     
