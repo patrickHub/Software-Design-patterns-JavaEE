@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Priority;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -57,5 +58,33 @@ public class CustomerDao {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * delete a customer.
+     * 
+     * @param id 
+     */
+    public void deleteCustomer(@Observes @Priority(10) Integer id){
+        
+        // get db connection
+        Connection connection = dbConnection.getConnection();
+        // write sql delete query
+        String sql = "DELETE FROM customers  WHERE userID = ?;";
+        try {
+            // get prepared statement
+            PreparedStatement statement =  connection.prepareStatement(sql);
+            // set sql delete parameters
+            statement.setInt(1, id);
+            // execute sql delete
+            int row = statement.executeUpdate();
+            // check if user entity is created
+            if (row == 0) {
+                throw new SQLException("Failled to delete customer, no rows affected.");
+	    }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

@@ -25,6 +25,6 @@ public @interface CustomerEvent {
     Type value();
     
     enum Type {
-        ADD, DELETE, USERADD, USERDELETE
+        ADD, UPDATE, USERADD, USERDELETE
     }
 }

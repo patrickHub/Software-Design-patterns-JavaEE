@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Priority;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -66,6 +67,34 @@ public class AuthenticationDao {
             }
 	        
            
+        } catch (SQLException ex) {
+            Logger.getLogger(AuthenticationDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    /**
+     * delete a user credentials.
+     * 
+     * @param id of the user to delete
+     */
+    public void deleteUserCredentials(@Observes @Priority(20) Integer id){
+   
+        // get db connection
+        Connection connection = dbConnection.getConnection();
+        // write sql delete query
+        String sql = "DELETE FROM users  WHERE userID = ?;";
+        try {
+            // get prepared statement
+            PreparedStatement statement =  connection.prepareStatement(sql);
+            // set sql delete parameters
+            statement.setInt(1, id);
+            // execute sql delete
+            int row = statement.executeUpdate();
+            // check if user entity is created
+            if (row == 0) {
+                throw new SQLException("Failled to delete user, no rows affected.");
+	    }
         } catch (SQLException ex) {
             Logger.getLogger(AuthenticationDao.class.getName()).log(Level.SEVERE, null, ex);
         }
