@@ -36,7 +36,7 @@ public class DBConnection {
             Class.forName("com.mysql.jdbc.Driver");
             Logger.getAnonymousLogger().info("Mysql JDBC Driver Registered");
             // get hold of the DriverManager
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/singletonObserverDesignPattersdb", "root", "P@trick29");
+            connection = DriverManager.getConnection("jdbc:mysql://singleton-observer-design-pattern-mysql:3306/singletonObserverDesignPattersdb?autoReconnect=true&useSSL=false", "admin", "admin");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

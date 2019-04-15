@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  singleton-observer-design-pattern:
+    container_name: singleton-observer-design-pattern.dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: patrickhub/singleton-observer-design-pattern:1.0-SNAPSHOT
+    ports:
+      - 8080:8080
+    depends_on:
+      - singleton-observer-design-pattern-mysql
+    networks:
+      singleton-observer-design-pattern-network:
+        aliases:
+          - singleton-observer-design-pattern
+
+  singleton-observer-design-pattern-mysql:
+    image: mysql:5.7
+    restart: always
+    container_name: singleton-observer-design-pattern-mysql.dev
+    networks:
+      singleton-observer-design-pattern-network:
+        aliases:
+          - singleton-observer-design-pattern-mysql
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+
+      # Where our data will be persisted
+    command: --init-file /data/singleton-observer-design-pattern/db/db.sql
+    volumes:
+      - ./db/db.sql:/data/singleton-observer-design-pattern/db/db.sql
+
+networks:
+  singleton-observer-design-pattern-network:
