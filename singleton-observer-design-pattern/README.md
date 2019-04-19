@@ -62,9 +62,9 @@ And you can start make request to localhost:8080/singleton-observer-design-patte
 
 To simplefy every thing we have use:
 
-- (Dockerfile)https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/Dockerfile which pull wildfly:15.0.0 from jboss/wildfly:15.0.0.Final then copy the
+- [Dockerfile](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/Dockerfile) which pull wildfly:15.0.0 from jboss/wildfly:15.0.0.Final then copy the
   _singleton-observer-design-pattern.war_ file to /opt/jboss/wildfly/standalone/deployments/
-- (docker-compose.yml)https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/docker-compose.yml which will create two services. One for build of the previous _Dockerfile_ and the other for mysql:5.7 image. As the _singleton-observer-design-pattern.dev_ container should make database query to the database _singleton-observer-design-pattern-mysql.dev_ container, we have used the feature of Network. So the two containers are sharing the same network _singleton-observer-design-pattern-network_ and this is what will enable those containers to speach each other.
+- [docker-compose.yml](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/docker-compose.yml) which will create two services. One for build of the previous _Dockerfile_ and the other for mysql:5.7 image. As the _singleton-observer-design-pattern.dev_ container should make database query to the database _singleton-observer-design-pattern-mysql.dev_ container, we have used the feature of Network. So the two containers are sharing the same network _singleton-observer-design-pattern-network_ and this is what will enable those containers to speach each other.
 
 ## Authors
 
