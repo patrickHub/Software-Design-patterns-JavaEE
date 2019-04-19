@@ -7,7 +7,7 @@ What is the motivation for the singleton pattern? Well it's about having a singl
 Java EE offers an elegant and easy way to implement the singleton pattern. All we need to do is annotate our class with just one annotation: @Singleton and our class become singleton.
 
 To demonstrate how we can use Singleton pattern, We have create a database connection class which will established connection to mysql
-server only once. In order to do that, first we have created a class call [DBConnection](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/src/main/java/com/patrickhub/dao/DBConnection.jav)a, annoted it with Singleton annotation. then as we want to establsih connection to database only once during the application startup, this class have been annotated with @Startup which will tell to the container to instantiate during the application deploiement. Well we have not done that but we can even inform the container that in case it did not succeed to make connection to the database, it will stop deploiement of the application in order to avoid Runtime Exception during execution. And lastly, we have use PostConstruct annotation in order to decouple the creation of the of the DBConnection object which is our singleton from the establishment of the connection to the database. So the container will first create the singleton object and then create the dababase connection object which is the only DBConnection attribute accessible with its getter.
+server only once. In order to do that, first we have created a class call [DBConnection](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/src/main/java/com/patrickhub/dao/DBConnection.java), annoted it with Singleton annotation. then as we want to establsih connection to database only once during the application startup, this class have been annotated with @Startup which will tell to the container to instantiate during the application deploiement. Well we have not done that but we can even inform the container that in case it did not succeed to make connection to the database, it will stop deploiement of the application in order to avoid Runtime Exception during execution. And lastly, we have use PostConstruct annotation in order to decouple the creation of the of the DBConnection object which is our singleton from the establishment of the connection to the database. So the container will first create the singleton object and then create the dababase connection object which is the only DBConnection attribute accessible with its getter.
 Now every time we need db connection to make request to the database, the container will simply inject the unique object of this class.
 
 ## Motivation for Observer Pattern
@@ -68,5 +68,5 @@ To simplefy every thing we have use:
 
 ## Authors
 
-- **(PatrickHub)[https://github.com/patrickHub]**
+- **[PatrickHub](https://github.com/patrickHub)**
  
