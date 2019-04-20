@@ -12,7 +12,7 @@ This project is design to introduce some of the most commonly used software desi
 
 ## Project Structure
 
-This project is structure in two modules. The first [Singleton-Observer-Design-Pattern](https://github.com/patrickHub/Software-Design-patterns-JavaEE/tree/master/singleton-observer-design-pattern) which is a simple REST API implementing the Singleton and Observer design pattern. The last which show how we can implement the Facade design pattern in a Banking Domain scenario.
+This project is structure in two modules. The first [Singleton-Observer-design-pattern](https://github.com/patrickHub/Software-Design-patterns-JavaEE/tree/master/singleton-observer-design-pattern) which is a simple REST API implementing the Singleton and Observer design pattern. The last acade-design-pattern](https://github.com/patrickHub/Software-Design-patterns-JavaEE/tree/master/facade-design-pattern) which show how we can implement the Facade design pattern in a Banking Domain scenario.
 
 ## Authors
 
