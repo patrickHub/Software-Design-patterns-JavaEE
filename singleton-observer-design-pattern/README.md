@@ -65,8 +65,8 @@ To simplefy every thing we have use:
 - [Dockerfile](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/Dockerfile) which pull wildfly:15.0.0 from jboss/wildfly:15.0.0.Final then copy the
   _singleton-observer-design-pattern.war_ file to /opt/jboss/wildfly/standalone/deployments/
 - [docker-compose.yml](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/docker-compose.yml) which will create two services. One for build of the previous _Dockerfile_ and the other for mysql:5.7 image. As the _singleton-observer-design-pattern.dev_ container should make database query to the database _singleton-observer-design-pattern-mysql.dev_ container, we have used the feature of Network. So the two containers are sharing the same network _singleton-observer-design-pattern-network_ and this is what will enable those containers to speach each other.
+- [buildAndRun.sh](https://github.com/patrickHub/Software-Design-patterns-JavaEE/blob/master/singleton-observer-design-pattern/buildAndRun.sh) which will execute several commands. first it will clean and package our singleton-observer-design-pattern-network application. And if maven clean and package succeed, he would remove the two docker containers and the image build from the Dockerfile in order to be able to reuse the container and the image names write in docker-compose.yml. Finaly it will run docker-compose up command to start everything. Then all you need to do after download this repository is to run this bash script file.
 
 ## Authors
 
 - **[PatrickHub](https://github.com/patrickHub)**
- 
